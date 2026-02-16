@@ -1,13 +1,29 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-type HeaderProps = {
-  mode?: 'auto' | 'light';
+type NavItem = {
+  label: string;
+  hash: `#${string}`; // '#service' など
 };
 
-export default function Header({ mode = 'auto' }: HeaderProps) {
+type HeaderProps = {
+  mode?: 'auto' | 'light';
+  title?: string;      // 左上 1行目
+  subtitle?: string;   // 左上 2行目
+  nav?: NavItem[];     // ナビ項目（LPごとに変える）
+};
+
+export default function Header({
+  mode = 'auto',
+  title = 'スカイネットワーク株式会社',
+  subtitle = '通信ソリューション',
+  nav = [
+    { label: '概要', hash: '#content' },
+    { label: 'お問い合わせ', hash: '#contact' },
+  ],
+}: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [onHero, setOnHero] = useState(mode === 'auto'); // 初期はautoならtrue寄りでOK
+  const [onHero, setOnHero] = useState(mode === 'auto');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -25,9 +41,7 @@ export default function Header({ mode = 'auto' }: HeaderProps) {
     }
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setOnHero(entry.isIntersecting);
-      },
+      ([entry]) => setOnHero(entry.isIntersecting),
       { rootMargin: '-80px 0px 0px 0px', threshold: 0 }
     );
 
@@ -52,27 +66,34 @@ export default function Header({ mode = 'auto' }: HeaderProps) {
   }, []);
 
   const headerClass = useMemo(() => {
-    const base = 'fixed inset-x-0 top-0 z-[80] transition-colors duration-200';
+    const base =
+      'fixed inset-x-0 top-0 z-[80] transition-colors duration-200';
     if (mode === 'light') return `${base} bg-white text-gray-900 shadow`;
     return onHero
       ? `${base} bg-transparent text-white`
       : `${base} bg-white text-gray-900 shadow`;
   }, [mode, onHero]);
 
-  // SPAでセクションへ移動（/#service など）
+  // SPAでセクションへ移動（/#section）
   const goSection = (hash: string) => {
     setIsOpen(false);
+
     if (location.pathname !== '/') {
       navigate('/' + hash);
       return;
     }
+
     const id = hash.replace('#', '');
     const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!el) return;
+
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // hash付き遷移してきた時、Home側で拾ってスクロールさせる（Home.tsxで対応）
-  // Header側はここでは何もしない
+  const isSectionExists = (hash: string) => {
+    const id = hash.replace('#', '');
+    return typeof document !== 'undefined' && !!document.getElementById(id);
+  };
 
   return (
     <header className={headerClass}>
@@ -88,10 +109,10 @@ export default function Header({ mode = 'auto' }: HeaderProps) {
             className="select-none leading-tight text-left"
           >
             <div className="font-extrabold text-[16px] md:text-[18px]">
-              衛星モバイル伝送出張サービス
+              {title}
             </div>
             <div className="font-extrabold text-[12px] md:text-[14px] opacity-90">
-              by スカイネットワーク株式会社
+              {subtitle}
             </div>
           </button>
 
@@ -112,7 +133,6 @@ export default function Header({ mode = 'auto' }: HeaderProps) {
           >
             <span className="sr-only">メニュー</span>
 
-            {/* bar top */}
             <span
               className={[
                 'absolute h-0.5 w-6 bg-current transition-all duration-300',
@@ -121,14 +141,12 @@ export default function Header({ mode = 'auto' }: HeaderProps) {
                   : '-translate-y-[7px] rotate-0',
               ].join(' ')}
             />
-            {/* bar middle */}
             <span
               className={[
                 'absolute h-0.5 w-6 bg-current transition-all duration-300',
                 isOpen ? 'opacity-0' : 'opacity-100',
               ].join(' ')}
             />
-            {/* bar bottom */}
             <span
               className={[
                 'absolute h-0.5 w-6 bg-current transition-all duration-300',
@@ -154,7 +172,7 @@ export default function Header({ mode = 'auto' }: HeaderProps) {
               : 'pointer-events-none opacity-0 -translate-y-2',
             'md:pointer-events-auto md:opacity-100 md:translate-y-0',
             'bg-white text-gray-900 md:bg-transparent rounded-xl border border-black/10 shadow md:rounded-none md:border-0 md:shadow-none',
-            'grid gap-1 p-2 md:p-0 md:flex md:items-center md:gap-[50px]',
+            'grid gap-1 p-2 md:p-0 md:flex md:items-center md:gap-[40px]',
             mode === 'light'
               ? 'md:text-gray-900'
               : onHero
@@ -162,42 +180,24 @@ export default function Header({ mode = 'auto' }: HeaderProps) {
               : 'md:text-gray-900',
           ].join(' ')}
         >
-          <li>
-            <button
-              type="button"
-              onClick={() => goSection('#service')}
-              className="block w-full text-left px-3 py-2 md:px-0 md:py-0 text-[16px] md:text-[18px] font-bold hover:opacity-80"
-            >
-              サービス概要
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => goSection('#rental')}
-              className="block w-full text-left px-3 py-2 md:px-0 md:py-0 text-[16px] md:text-[18px] font-bold hover:opacity-80"
-            >
-              レンタル機器構成
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => goSection('#pricing')}
-              className="block w-full text-left px-3 py-2 md:px-0 md:py-0 text-[16px] md:text-[18px] font-bold hover:opacity-80"
-            >
-              料金
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => goSection('#contact')}
-              className="block w-full text-left px-3 py-2 md:px-0 md:py-0 text-[16px] md:text-[18px] font-bold hover:opacity-80"
-            >
-              お問い合わせ
-            </button>
-          </li>
+          {nav.map((item) => {
+            const enabled = isSectionExists(item.hash);
+            return (
+              <li key={item.hash}>
+                <button
+                  type="button"
+                  onClick={() => enabled && goSection(item.hash)}
+                  disabled={!enabled}
+                  className={[
+                    'block w-full text-left px-3 py-2 md:px-0 md:py-0 text-[16px] md:text-[18px] font-bold',
+                    enabled ? 'hover:opacity-80' : 'opacity-40 cursor-not-allowed',
+                  ].join(' ')}
+                >
+                  {item.label}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </header>
