@@ -1,14 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home.tsx';
-import Request from './pages/Request.tsx';
-import Thanks from './pages/Thanks.tsx';
-import ScrollToTop from './components/ScrollToTop.tsx';
+import Home from './pages/Home';
+import Request from './pages/Request';
+import Thanks from './pages/Thanks';
+import ScrollToTop from './components/ScrollToTop';
 
 export default function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <BrowserRouter>
       <ScrollToTop />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/request" element={<Request />} />
