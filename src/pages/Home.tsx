@@ -113,7 +113,7 @@ export default function Home() {
               <div className="mt-4 h-0.5 w-14 bg-white" />
             </div>
 
-            <div className="max-w-[640px] -translate-y-20 xl:-translate-y-24">
+            <div className="max-w-[640px] -translate-y-24 xl:-translate-y-28">
               <p className="mb-5 text-xl font-extrabold tracking-[0.16em] text-white">
                 <span className="mr-4 text-yellow-300">//</span>
                 車両加工0の導入案
@@ -350,12 +350,11 @@ export default function Home() {
       ========================== */}
       <section className="lg:hidden">
         <div className="relative min-h-[92vh] overflow-hidden bg-slate-950 text-white">
-          <img
-            src="/img/satcar-hero-sp.png"
-            alt="簡易衛星通信車"
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ objectPosition: '68% center' }}
-          />
+        <img
+          src="/img/satcar-hero-sp.png"
+          alt="簡易衛星通信車"
+          className="absolute inset-0 h-full w-full object-cover object-[68%_center] min-[590px]:scale-95 min-[590px]:object-[62%_42%] min-[768px]:scale-90 min-[768px]:object-[58%_38%]"
+        />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/35 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/20" />
 
@@ -409,7 +408,7 @@ export default function Home() {
               )}
             </div>
 
-            <div className="mt-14 min-[390px]:mt-16">
+            <div className="mt-10 min-[390px]:mt-12 min-[590px]:mt-14">
               <p className="mb-4 text-lg font-extrabold tracking-[0.14em]">
                 <span className="mr-2 text-yellow-300">//</span>
                 車両加工0の導入案
