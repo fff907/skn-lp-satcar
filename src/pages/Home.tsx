@@ -11,17 +11,17 @@ const problems = [
 
 const strengths = [
   {
-    icon: '🛠',
+    icon: 'tool',
     title: '車両加工・穴あけ不要',
     desc: '窓から入線する運用で、車両に穴あけや開口を施さず活用できます。',
   },
   {
-    icon: '◎',
+    icon: 'cost',
     title: '市販部材中心で低コスト',
     desc: '市販のキャリア・ラック等を活用し、高額な専用艤装の負担を抑えます。',
   },
   {
-    icon: '📡',
+    icon: 'satellite',
     title: 'アンテナ着脱可能',
     desc: '必要な時だけ設置・運用し、普段は通常車両として利用できます。',
   },
@@ -53,6 +53,14 @@ const navItems = [
   { label: '関連サービス', key: 'related-service' },
   { label: 'お問い合わせ', key: 'contact' },
 ];
+
+const CONTACT_URL = 'https://www.skynetwork.jp/index.php/contact/#satcar';
+
+const blueCtaClass =
+  'group relative mt-5 flex w-full items-center justify-center overflow-hidden rounded-full bg-[#0b2b66] px-5 py-4 text-base font-bold text-white shadow-lg shadow-blue-950/15 transition hover:bg-[#123b82] hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0b2b66] before:absolute before:inset-0 before:-translate-x-[140%] before:skew-x-[-20deg] before:bg-gradient-to-r before:from-transparent before:via-white/25 before:to-transparent before:transition before:duration-700 hover:before:translate-x-[140%]';
+
+const yellowCtaClass =
+  'group relative flex w-full items-center justify-center overflow-hidden rounded-full bg-yellow-400 px-5 py-4 text-base font-extrabold text-slate-950 shadow-lg shadow-black/20 transition hover:bg-yellow-300 hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-300 before:absolute before:inset-0 before:-translate-x-[140%] before:skew-x-[-20deg] before:bg-gradient-to-r before:from-transparent before:via-white/45 before:to-transparent before:transition before:duration-700 hover:before:translate-x-[140%]';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -96,23 +104,23 @@ export default function Home() {
 
           <div className="relative z-10 flex h-full flex-col justify-between px-10 py-8 text-white xl:px-12">
             <div>
-              <p className="text-lg font-bold leading-tight">
-                スカイネットワーク株式会社
-              </p>
-              <p className="mt-1 text-sm font-bold text-white/90">
-                通信ソリューション
-              </p>
+            <p className="text-lg font-bold leading-tight">
+              簡易衛星通信車
+            </p>
+            <p className="mt-1 text-sm font-bold text-white/90">
+              by スカイネットワーク株式会社
+            </p>
               <div className="mt-4 h-0.5 w-14 bg-white" />
             </div>
 
-            <div className="max-w-[560px]">
+            <div className="max-w-[640px] -translate-y-20 xl:-translate-y-24">
               <p className="mb-5 text-xl font-extrabold tracking-[0.16em] text-white">
                 <span className="mr-4 text-yellow-300">//</span>
-                簡易衛星通信車
+                車両加工0の導入案
                 <span className="ml-4 text-yellow-300">//</span>
               </p>
 
-              <h1 className="text-[3rem] font-extrabold leading-[1.18] tracking-tight drop-shadow-lg xl:text-[3.8rem] 2xl:text-[4rem]">
+              <h1 className="text-[2.75rem] font-extrabold leading-[1.15] tracking-tight drop-shadow-lg xl:text-[3.35rem] 2xl:text-[3.55rem]">
                 普段使いの車が、
                 <br />
                 非常時の通信拠点に。
@@ -128,7 +136,9 @@ export default function Home() {
             <div className="grid grid-cols-3 gap-5 border-t border-white/25 pt-6">
               {strengths.map((item) => (
                 <div key={item.title}>
-                  <div className="mb-3 text-3xl">{item.icon}</div>
+                  <div className="mb-3 text-white">
+                    <FeatureIcon type={item.icon} />
+                  </div>
                   <p className="text-base font-bold xl:text-lg">
                     {item.title}
                   </p>
@@ -145,78 +155,71 @@ export default function Home() {
         <div className="min-h-screen bg-white px-8 py-6 xl:px-12">
           <div className="mx-auto w-full max-w-[430px]">
             <div className="min-h-[calc(100vh-48px)] rounded-[2rem] border border-slate-200 bg-white shadow-[0_18px_60px_rgba(15,23,42,0.10)]">
-              <div className="relative flex items-start justify-between px-6 pb-5 pt-6">
-                <div>
-                  <p className="text-base font-extrabold text-slate-900">
-                    スカイネットワーク株式会社
-                  </p>
-                  <p className="mt-1 text-[11px] font-bold text-slate-500">
-                    通信ソリューション
-                  </p>
-                </div>
+              <div className="relative flex justify-end px-6 pb-3 pt-6">
+                 <button
+                    type="button"
+                    aria-label="メニュー"
+                    aria-expanded={isMenuOpen}
+                    onClick={() => setIsMenuOpen((prev) => !prev)}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white"
+                  >
+                    <span
+                      className={[
+                        'relative block h-0.5 w-6 bg-[#0b2b66] transition',
+                        isMenuOpen
+                          ? 'rotate-45 before:top-0 before:rotate-90 after:opacity-0'
+                          : 'before:-top-2 after:top-2',
+                        'before:absolute before:left-0 before:h-0.5 before:w-6 before:bg-[#0b2b66] before:transition',
+                        'after:absolute after:left-0 after:h-0.5 after:w-6 after:bg-[#0b2b66] after:transition',
+                      ].join(' ')}
+                    />
+                  </button>
 
-                <button
-                  type="button"
-                  aria-label="メニュー"
-                  aria-expanded={isMenuOpen}
-                  onClick={() => setIsMenuOpen((prev) => !prev)}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white"
-                >
-                  <span
-                    className={[
-                      'relative block h-0.5 w-6 bg-[#0b2b66] transition',
-                      isMenuOpen
-                        ? 'rotate-45 before:top-0 before:rotate-90 after:opacity-0'
-                        : 'before:-top-2 after:top-2',
-                      'before:absolute before:left-0 before:h-0.5 before:w-6 before:bg-[#0b2b66] before:transition',
-                      'after:absolute after:left-0 after:h-0.5 after:w-6 after:bg-[#0b2b66] after:transition',
-                    ].join(' ')}
-                  />
-                </button>
+                  {isMenuOpen && (
+                    <nav className="absolute left-4 right-4 top-[64px] z-20 rounded-2xl border border-slate-200 bg-white p-3 shadow-xl">
+                      <ul className="grid gap-1">
+                        {navItems.map((item) => (
+                          <li key={item.key}>
+                            <button
+                              type="button"
+                              onClick={() => scrollToSection(item.key)}
+                              className="block w-full rounded-xl px-4 py-3 text-left text-sm font-bold text-slate-700 hover:bg-slate-50"
+                            >
+                              {item.label}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </nav>
+                  )}
+               </div>
 
-                {isMenuOpen && (
-                  <nav className="absolute left-4 right-4 top-[76px] z-20 rounded-2xl border border-slate-200 bg-white p-3 shadow-xl">
-                    <ul className="grid gap-1">
-                      {navItems.map((item) => (
-                        <li key={item.key}>
-                          <button
-                            type="button"
-                            onClick={() => scrollToSection(item.key)}
-                            className="block w-full rounded-xl px-4 py-3 text-left text-sm font-bold text-slate-700 hover:bg-slate-50"
-                          >
-                            {item.label}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
-                )}
-              </div>
-
-              <div className="border-y border-slate-100 px-6 py-7 text-center">
+               <div className="border-y border-slate-100 px-6 py-7 text-center">
                 <p className="text-xs font-extrabold tracking-[0.25em] text-[#0b2b66]">
-                  //　簡易衛星通信車　//
+                  SATELLITE COMMUNICATION VEHICLE
                 </p>
 
-                <h2 className="mt-3 text-[1.75rem] font-extrabold leading-tight text-[#0b2b66]">
-                  普段使いの車が、
+                <h2 className="mt-3 text-[1.55rem] font-extrabold leading-tight text-[#0b2b66]">
+                  車両を大きく改造せず、
                   <br />
-                  非常時の通信拠点に。
+                  通信手段を確保。
                 </h2>
 
-                <p className="mt-3 text-sm font-bold text-slate-700">
-                  車両加工
-                  <span className="mx-1 text-xl text-yellow-400">0</span>
-                  で、必要な時だけつながる。
+                <p className="mt-3 text-sm font-bold leading-6 text-slate-700">
+                  災害時・イベント時・現場対応時など、
+                  <br />
+                  必要な場面に合わせて構成をご相談いただけます。
                 </p>
 
-                <Link
-                  to="/request"
-                  className="mt-5 flex w-full items-center justify-center rounded-full bg-[#0b2b66] px-5 py-4 text-sm font-bold text-white shadow-lg shadow-blue-950/15 transition hover:bg-[#123b82]"
+                <a
+                  href={CONTACT_URL}
+                  className={blueCtaClass}
                 >
-                  ✉　簡易衛星通信車の相談をする
-                  <span className="ml-3">›</span>
-                </Link>
+                  <span className="relative">
+                    簡易衛星通信車の相談をする
+                  </span>
+                  <span className="relative ml-3">›</span>
+                </a>
               </div>
 
               <div className="space-y-8 px-6 py-7">
@@ -249,7 +252,9 @@ export default function Home() {
                         key={item.title}
                         className="rounded-2xl border border-slate-200 bg-white px-3 py-4 text-center"
                       >
-                        <div className="text-3xl">{item.icon}</div>
+                        <div className="flex justify-center text-[#0b2b66]">
+                          <FeatureIcon type={item.icon} />
+                        </div>
                         <p className="mt-3 text-[13px] font-extrabold leading-5 text-[#0b2b66]">
                           {item.title}
                         </p>
@@ -307,13 +312,6 @@ export default function Home() {
                     >
                       衛星モバイル伝送出張サービス
                     </a>
-
-                    <Link
-                      to="/request"
-                      className="rounded-full border border-slate-200 px-4 py-3 text-center text-xs font-bold text-slate-700 transition hover:border-[#0b2b66] hover:text-[#0b2b66]"
-                    >
-                      導入相談・お問い合わせ
-                    </Link>
                   </div>
                 </section>
 
@@ -327,13 +325,15 @@ export default function Home() {
                     製品に関するご相談・お見積りなど、お気軽にお問い合わせください。
                   </p>
 
-                  <Link
-                    to="/request"
-                    className="mt-5 flex w-full items-center justify-center rounded-full bg-yellow-400 px-5 py-4 text-sm font-extrabold text-slate-950 transition hover:bg-yellow-300"
+                  <a
+                    href={CONTACT_URL}
+                    className={`${yellowCtaClass} mt-12`}
                   >
-                    ✉　簡易衛星通信車の相談をする
-                    <span className="ml-3">›</span>
-                  </Link>
+                    <span className="relative">
+                      簡易衛星通信車の相談をする
+                    </span>
+                    <span className="relative ml-3">›</span>
+                  </a>
 
                   <p className="mt-4 text-center text-sm font-bold text-white/80">
                     ☎ 043-259-6921
@@ -359,14 +359,14 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/35 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/20" />
 
-          <div className="relative z-10 flex min-h-[92vh] flex-col justify-between px-5 pb-8 pt-6">
+          <div className="relative z-10 flex min-h-[92vh] flex-col px-5 pb-10 pt-6">
             <div className="relative flex items-start justify-between">
               <div>
                 <p className="text-base font-extrabold">
-                  スカイネットワーク株式会社
+                  簡易衛星通信車
                 </p>
                 <p className="mt-1 text-xs font-bold text-white/85">
-                  通信ソリューション
+                  by スカイネットワーク株式会社
                 </p>
                 <div className="mt-4 h-0.5 w-12 bg-white" />
               </div>
@@ -409,10 +409,10 @@ export default function Home() {
               )}
             </div>
 
-            <div className="pb-8">
+            <div className="mt-14 min-[390px]:mt-16">
               <p className="mb-4 text-lg font-extrabold tracking-[0.14em]">
                 <span className="mr-2 text-yellow-300">//</span>
-                簡易衛星通信車
+                車両加工0の導入案
                 <span className="ml-2 text-yellow-300">//</span>
               </p>
 
@@ -431,14 +431,18 @@ export default function Home() {
                 <br />
                 必要な時だけつながる。
               </p>
+            </div>
 
-              <Link
-                to="/request"
-                className="mt-8 flex w-full items-center justify-center rounded-full bg-yellow-400 px-5 py-4 text-sm font-extrabold text-slate-950 shadow-lg shadow-black/25"
+            <div className="mt-auto pt-10">
+              <a
+                href={CONTACT_URL}
+                className={yellowCtaClass}
               >
-                ✉　簡易衛星通信車の相談をする
-                <span className="ml-3">›</span>
-              </Link>
+                <span className="relative">
+                  簡易衛星通信車の相談をする
+                </span>
+                <span className="relative ml-3">›</span>
+              </a>
             </div>
           </div>
         </div>
@@ -470,7 +474,9 @@ export default function Home() {
                     key={item.title}
                     className="rounded-2xl border border-slate-200 bg-white p-5"
                   >
-                    <div className="text-3xl">{item.icon}</div>
+                    <div className="text-[#0b2b66]">
+                      <FeatureIcon type={item.icon} />
+                    </div>
                     <p className="mt-3 text-lg font-extrabold text-[#0b2b66]">
                       {item.title}
                     </p>
@@ -518,13 +524,6 @@ export default function Home() {
                 >
                   衛星モバイル伝送出張サービス
                 </a>
-
-                <Link
-                  to="/request"
-                  className="rounded-2xl border border-slate-200 px-4 py-4 text-sm font-bold text-slate-700"
-                >
-                  導入相談・お問い合わせ
-                </Link>
               </div>
             </MobileSection>
 
@@ -545,12 +544,14 @@ export default function Home() {
                 といった段階でも大丈夫です。
               </p>
 
-              <Link
-                to="/request"
-                className="mt-5 flex w-full items-center justify-center rounded-full bg-yellow-400 px-5 py-4 text-sm font-extrabold text-slate-950"
+              <a
+                href={CONTACT_URL}
+                className={`${yellowCtaClass} mt-5`}
               >
-                簡易衛星通信車の相談をする
-              </Link>
+                <span className="relative">
+                  簡易衛星通信車の相談をする
+                </span>
+              </a>
             </section>
           </div>
         </div>
@@ -560,7 +561,6 @@ export default function Home() {
 }
 
 function SectionTitle({
-  number,
   title,
   dark = false,
 }: {
@@ -570,15 +570,6 @@ function SectionTitle({
 }) {
   return (
     <div className="flex items-center gap-2">
-      <span
-        className={
-          dark
-            ? 'text-sm font-extrabold text-yellow-300'
-            : 'text-sm font-extrabold text-[#0b2b66]'
-        }
-      >
-        {number}
-      </span>
       <h3
         className={
           dark
@@ -594,7 +585,6 @@ function SectionTitle({
 
 function MobileSection({
   sectionKey,
-  number,
   title,
   children,
 }: {
@@ -605,13 +595,92 @@ function MobileSection({
 }) {
   return (
     <section data-section={sectionKey}>
-      <p className="text-sm font-extrabold tracking-[0.18em] text-[#0b2b66]">
-        {number}
-      </p>
-      <h2 className="mt-2 text-2xl font-extrabold leading-tight text-[#0b2b66]">
+      <h2 className="text-2xl font-extrabold leading-tight text-[#0b2b66]">
         {title}
       </h2>
       {children}
     </section>
+  );
+}
+
+function FeatureIcon({
+  type,
+  className = '',
+}: {
+  type: string;
+  className?: string;
+}) {
+  const common = `h-8 w-8 ${className}`;
+
+  if (type === 'tool') {
+    return (
+      <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path
+          d="M14.5 5.5l4 4M4 20l7.5-7.5M13 7l4 4L8.5 19.5H4.5v-4L13 7z"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M15.5 4.5l4 4"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+        />
+      </svg>
+    );
+  }
+
+  if (type === 'cost') {
+    return (
+      <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path
+          d="M12 5c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3z"
+          stroke="currentColor"
+          strokeWidth="1.8"
+        />
+        <path
+          d="M4 8v4c0 1.7 3.6 3 8 3s8-1.3 8-3V8"
+          stroke="currentColor"
+          strokeWidth="1.8"
+        />
+        <path
+          d="M4 12v4c0 1.7 3.6 3 8 3s8-1.3 8-3v-4"
+          stroke="currentColor"
+          strokeWidth="1.8"
+        />
+      </svg>
+    );
+  }
+
+  return (
+    <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M5 19c4.5-1 8.5-3.5 11-7.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M14 4c3.3 1.8 5 4.3 5 7 0 4.4-4.6 8-10.2 8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M9 15l8-8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M16 7h4v4"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
