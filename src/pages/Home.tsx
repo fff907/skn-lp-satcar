@@ -100,7 +100,7 @@ export default function Home() {
             className="absolute inset-0 h-full w-full object-cover object-center"
           />
 
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/35 via-slate-950/10 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/26 via-slate-950/5 to-transparent" />
 
           <div className="relative z-10 flex h-full flex-col justify-between px-10 py-8 text-white xl:px-12">
             <div>
@@ -350,13 +350,21 @@ export default function Home() {
       ========================== */}
       <section className="lg:hidden">
         <div className="relative min-h-[92vh] overflow-hidden bg-slate-950 text-white">
+        {/* SP用：〜589px */}
         <img
           src="/img/satcar-hero-sp.png"
           alt="簡易衛星通信車"
-          className="absolute inset-0 h-full w-full object-cover object-[68%_center] min-[590px]:scale-95 min-[590px]:object-[62%_42%] min-[768px]:scale-90 min-[768px]:object-[58%_38%]"
+          className="absolute inset-0 h-full w-full object-cover object-[68%_50%] min-[590px]:hidden"
         />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/35 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/20" />
+
+        {/* タブレット用：590px〜1023px */}
+        <img
+          src="/img/satcar-hero-tablet.png"
+          alt="簡易衛星通信車"
+          className="absolute inset-0 hidden h-full w-full object-cover object-center min-[590px]:block"
+        />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/72 via-slate-950/18 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/28 via-transparent to-slate-950/8" />
 
           <div className="relative z-10 flex min-h-[92vh] flex-col px-5 pb-10 pt-6">
             <div className="relative flex items-start justify-between">
