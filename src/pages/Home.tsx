@@ -623,77 +623,28 @@ function FeatureIcon({
   type: string;
   className?: string;
 }) {
-  const common = `h-8 w-8 ${className}`;
+  const baseClass =
+    `inline-flex h-11 w-11 items-center justify-center rounded-full border-2 border-current text-[#0b2b66] ${className}`;
 
   if (type === 'tool') {
     return (
-      <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path
-          d="M14.5 5.5l4 4M4 20l7.5-7.5M13 7l4 4L8.5 19.5H4.5v-4L13 7z"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M15.5 4.5l4 4"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-        />
-      </svg>
+      <div className={baseClass} aria-hidden="true">
+        <span className="text-2xl font-black leading-none">×</span>
+      </div>
     );
   }
 
   if (type === 'cost') {
     return (
-      <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path
-          d="M12 5c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3z"
-          stroke="currentColor"
-          strokeWidth="1.8"
-        />
-        <path
-          d="M4 8v4c0 1.7 3.6 3 8 3s8-1.3 8-3V8"
-          stroke="currentColor"
-          strokeWidth="1.8"
-        />
-        <path
-          d="M4 12v4c0 1.7 3.6 3 8 3s8-1.3 8-3v-4"
-          stroke="currentColor"
-          strokeWidth="1.8"
-        />
-      </svg>
+      <div className={baseClass} aria-hidden="true">
+        <span className="text-2xl font-black leading-none">¥</span>
+      </div>
     );
   }
 
   return (
-    <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M5 19c4.5-1 8.5-3.5 11-7.5"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M14 4c3.3 1.8 5 4.3 5 7 0 4.4-4.6 8-10.2 8"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M9 15l8-8"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M16 7h4v4"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <div className={baseClass} aria-hidden="true">
+      <span className="text-2xl font-black leading-none">⇄</span>
+    </div>
   );
 }
