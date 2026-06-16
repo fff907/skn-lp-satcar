@@ -95,7 +95,7 @@ export default function Home() {
       {/* LEFT HERO */}
       <div className="sticky top-0 h-screen overflow-hidden">
         <img
-          src="/img/satcar-hero-main.png"
+          src="/img/satcar-hero-main.webp"
           alt="簡易衛星通信車"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
@@ -350,14 +350,14 @@ export default function Home() {
         <div className="relative min-h-[92vh] overflow-hidden bg-slate-950 text-white">
         {/* SP用：〜589px */}
         <img
-          src="/img/satcar-hero-sp.png"
+          src="/img/satcar-hero-sp.webp"
           alt="簡易衛星通信車"
           className="absolute inset-0 h-full w-full object-cover object-[68%_50%] min-[590px]:hidden"
         />
 
         {/* タブレット用：590px〜1023px */}
         <img
-          src="/img/satcar-hero-tablet.png"
+          src="/img/satcar-hero-tablet.webp"
           alt="簡易衛星通信車"
           className="absolute inset-0 hidden h-full w-full object-cover object-center min-[590px]:block"
         />
