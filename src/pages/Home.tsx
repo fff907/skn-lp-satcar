@@ -7,14 +7,14 @@ const problems = [
   
   '艤装費が高額になり、導入のハードルが高い',
   '専用車両を購入しないと実現できないのでは…',
-  '必要な時だけ使いたいのに、常設だと運用が重くなる',
+  '必要な時だけ使いたいのに、常設だと管理の負担が大きくなる',
 ];
 
 const strengths = [
   {
     icon: 'tool',
     title: '車両加工・穴あけ不要',
-    desc: '窓から入線する運用で、車両に穴あけや開口を施さず活用できます。',
+    desc: '窓からケーブルを引き込む構成により、車両に穴あけや開口を施さず活用できます。',
   },
   {
     icon: 'cost',
@@ -24,7 +24,7 @@ const strengths = [
   {
     icon: 'satellite',
     title: 'アンテナ着脱可能',
-    desc: '必要な時だけ設置・運用し、普段は通常車両として利用できます。',
+    desc: '必要な時だけ設置して使い、普段は通常車両として利用できます。',
   },
 ];
 
@@ -313,7 +313,7 @@ export default function Home() {
                 <h2 className="mt-3 text-2xl font-extrabold leading-tight">
                   まずは「使う場面」から、
                   <br />
-                  運用を設計します
+                  最適な使い方をご提案します
                 </h2>
 
                 <p className="mt-3 text-sm font-medium leading-7 text-white/80">
@@ -544,7 +544,7 @@ export default function Home() {
               <h2 className="mt-3 text-2xl font-extrabold leading-tight">
                 まずは「使う場面」から、
                 <br />
-                運用を設計します
+                最適な使い方をご提案します
               </h2>
 
               <p className="mt-3 text-sm font-medium leading-7 text-white/80">
