@@ -1,5 +1,4 @@
 import { useState, type ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 const problems = [
