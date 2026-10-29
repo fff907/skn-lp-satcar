@@ -12,7 +12,7 @@ export default function Footer({ compact = false }: FooterProps) {
           </p>
 
           <div className="space-y-2 leading-relaxed">
-            <p>所在地：千葉県千葉市花見川区犢橋町320-5（千葉支店）</p>
+            <p>所在地：千葉県千葉市若葉区殿台町125-1（千葉営業所）</p>
             <p>
               サイト：
               <a
